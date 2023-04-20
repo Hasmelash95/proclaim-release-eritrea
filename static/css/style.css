@@ -22,7 +22,6 @@ body {
     flex-direction: column;
 }
 
-
 /* Navigation bar */
 nav {
     max-width: 2000px;
@@ -52,7 +51,6 @@ h4,
 nav li {
     margin-left: 10px;
 }
-
 
 .nav-link:hover {
     color: rgb(135, 164, 173);
