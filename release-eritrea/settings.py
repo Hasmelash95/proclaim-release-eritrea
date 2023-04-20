@@ -116,6 +116,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'release-eritrea.wsgi.application'
 
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
