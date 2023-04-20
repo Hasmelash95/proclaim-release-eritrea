@@ -363,7 +363,7 @@ footer {
 @media screen and (max-width: 900px) {
 
     body {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 
     textarea {
@@ -441,14 +441,21 @@ footer {
 @media screen and (max-width: 460px) {
 
     h2 {
-        font-size: 1.15rem;
+        font-size: 1.25rem;
     }
 
-    h3, 
+    h3 {
+        font-size: 1.1rem;
+    }
+ 
     h4,
     h5,
     h6 {
         font-size: 1rem;
+    }
+
+    div h4 {
+        margin-left: 5px;
     }
 
     .logo strong {
