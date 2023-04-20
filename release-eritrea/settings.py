@@ -115,7 +115,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'proclaim-release-eritrea.wsgi.application'
+WSGI_APPLICATION = 'release-eritrea.wsgi.application'
 
 CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
