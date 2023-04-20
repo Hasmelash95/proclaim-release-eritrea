@@ -1,1 +1,1 @@
-web: gunicorn release-eritrea.wsgi:app
+web: gunicorn release-eritrea.wsgi:application
