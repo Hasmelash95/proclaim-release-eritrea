@@ -37,7 +37,8 @@ ALLOWED_HOSTS = [
     'releaseeritrea.org',
     'https://proclaim-release-eritrea.onrender.com/',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    '0.0.0.0'
 ]
 
 # Application definition
