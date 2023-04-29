@@ -2,11 +2,11 @@
 
 ## Release Eritrea
 
-[Check out the deployed site](https://release-eritrea.herokuapp.com/)
+[Check out the deployed site](https://proclaim-release-eritrea.onrender.com/)
 
 Proclaim! Release Eritrea is a human rights charity advocating for the persecuted Christians in Eritrea. It is a global partnership which advocates on behalf of victims of abuse by the PDFJ's (the ruling party of Eritrea) regime and provides humanitarian assistance to the victims and their families. The website offers updates to those who wish to learn more about the human rights abuses happening in Eritrea with press releases that logged in users can comment on and bookmark in their favorites. In addition, there are social media links and profiles of the members of Release Eritrea in case those visiting the site wish to get in touch and get involved. 
 
-![Screenshot 2023-01-17 at 19 15 53](https://user-images.githubusercontent.com/103432143/212991420-f9f8db80-860f-49e9-a0a9-1af6d36a8627.png)
+![Screenshot 2023-04-29 at 15 41 19](https://user-images.githubusercontent.com/103432143/235308643-bd39de01-a7dd-4d77-83ef-3ee54d2e95a8.png)
 
 ## Table of Contents
 
@@ -33,7 +33,6 @@ Proclaim! Release Eritrea is a human rights charity advocating for the persecute
 * [Validation](#validation)
 * [Performance](#performance)
 * [Functional](#functional)
-* [Responsive Design](#responsive-design)
 * [Browser Compatibility](#browser-compatibility)
 * [Testing User Stories](#testing-user-stories)
 
@@ -184,19 +183,17 @@ A fade in effect is triggered when an object is visible to the user - some eleme
   
 ### Header and Hero
   
-The header contains the logo of Release Eritrea along with the name (a bird breaking a chain) along with the nav elements which take the users to specific sections of the page or to other sites within the page. There are Sign In and Sign Up options for users who have not been authenticated with links to the relevant pages. 
+The header contains the logo of Release Eritrea along with the name (a bird breaking a chain) along with the nav elements (in the toggler) which take the users to specific sections of the page or to other sites within the page. There are Sign In and Sign Up options for users who have not been authenticated with links to the relevant pages. 
   
-![Screenshot 2023-01-22 at 14 28 29](https://user-images.githubusercontent.com/103432143/213921167-873ee366-67f7-4498-a03d-e4bb03482ec1.png)
+![Screenshot 2023-04-29 at 15 43 59](https://user-images.githubusercontent.com/103432143/235308724-eb8b686c-db7f-4097-a349-8cd80a67ae9f.png)
 
 If the User has already signed in, a 'Hello, [User Name]!' appears along with a Logout link. 
-  
-![Screenshot 2023-01-22 at 14 28 43](https://user-images.githubusercontent.com/103432143/213921226-074f7aa3-b7c7-410c-aa6a-1109a21707a9.png)
 
-The Navbar remains on screen as the user scrolls to allow for easy navigation. The active page is underlined (in this case, the home page). 
+The header remains on screen as the user scrolls to allow for easy navigation. The active page is underlined (in this case, the home page). 
   
 The hero image of a hand holding chains is adjacent to a verse (recommended by the client). This fades into view when the page has loaded. 
   
-![Screenshot 2023-01-22 at 14 34 40](https://user-images.githubusercontent.com/103432143/213921358-e87542ca-f31f-4995-9f4d-b190db77868c.png)
+![Screenshot 2023-04-29 at 15 45 27](https://user-images.githubusercontent.com/103432143/235308778-4227dc31-dd71-42e7-88f5-28b886746063.png)
   
 ### About Us
 
@@ -204,47 +201,43 @@ The About Us section introduces visitors of the site to Release Eritrea and prov
 
 In addition, links are provided to give users additional resources, such as links to the Team Page and external links to partner charity websites (which open in another tab).
   
-![Screenshot 2023-01-22 at 14 39 17](https://user-images.githubusercontent.com/103432143/213921600-23a4bd5b-203e-47b9-8116-c57b34a71a6e.png)
-  
-![Screenshot 2023-01-22 at 14 40 27](https://user-images.githubusercontent.com/103432143/213921659-4491d3ba-a337-462f-bbaa-f8b215ce48c5.png)
+![Screenshot 2023-04-29 at 15 46 13](https://user-images.githubusercontent.com/103432143/235308814-629c1ba5-499b-423c-8241-3ea1a87c479d.png)
+
+![Screenshot 2023-04-29 at 15 46 45](https://user-images.githubusercontent.com/103432143/235308833-5b4f2f6c-bd6b-4e7a-85f0-521cf2e70940.png)
 
 ### Press Releases
   
 The main draw of the site is of course the press releases. Previews with links to the detailed pages of the articles allow users to peruse through the many pages and click on whichever article captures their attention. 
   
-![Screenshot 2023-01-25 at 06 45 18](https://user-images.githubusercontent.com/103432143/214497993-57f38143-0bb3-48dc-9d4e-1b0165aa4db8.png)
+![Screenshot 2023-04-29 at 15 54 49](https://user-images.githubusercontent.com/103432143/235309182-2701ee73-8e8b-4a2f-ac26-edb356afcab3.png)
   
 Article detail pages have a comment section with a comment form, the latter of which is only visible to logged in users. Comments must be approved by the admin to be visible under the article.
   
 ![Screenshot 2023-01-22 at 14 49 12](https://user-images.githubusercontent.com/103432143/213922278-d2ea1186-9343-4b4d-a4d2-7d94f9d96057.png)
 
 ![Screenshot 2023-01-22 at 14 50 21](https://user-images.githubusercontent.com/103432143/213922289-eba7c310-e47b-429b-b61e-fbcb5dbf63bc.png)
-  
-![Screenshot 2023-01-22 at 14 51 17](https://user-images.githubusercontent.com/103432143/213922267-6c972178-4729-446b-80bc-0cca42ed07ef.png)
 
 Admin may click on the edit or delete buttons, or post a new article article from that section. There are also buttons to direct users to the Favorites or Search Filter pages.
-
-![Screenshot 2023-01-22 at 14 45 17](https://user-images.githubusercontent.com/103432143/213921908-077fcc08-c2e2-4746-bb4e-3bb06b8f772e.png)
   
 ![Screenshot 2023-01-23 at 15 10 34](https://user-images.githubusercontent.com/103432143/214075282-0581d278-6df1-4ef9-b8ee-88b088f4a4e6.png)
-  
+
 ![Screenshot 2023-01-25 at 05 27 53](https://user-images.githubusercontent.com/103432143/214487232-ae405d81-d9c5-4fdd-9e8c-c2c30fd81abc.png)
   
 The Search Filter page allows users to find the article they need through tags or words or phrases in the title.
   
-![Screenshot 2023-01-25 at 15 45 00](https://user-images.githubusercontent.com/103432143/214609259-4c2fc7b2-a4d2-469c-b23f-b50eaa1e6965.png)
+![Screenshot 2023-04-29 at 15 55 53](https://user-images.githubusercontent.com/103432143/235309221-b6349b1c-69be-4011-abeb-7aca73a55fc7.png)
 
 ### Gallery
   
 The Gallery section shows users official Release Eritrea pictures for a visual sense of what the organisation does. Admin can add, edit and delete pictures via the admin page. 
   
-![Screenshot 2023-01-22 at 14 52 37](https://user-images.githubusercontent.com/103432143/213922368-746ba9ef-764c-48c4-8ffb-795fdecf57aa.png)
+![Screenshot 2023-04-29 at 15 57 32](https://user-images.githubusercontent.com/103432143/235309320-df4af13c-5c90-4f54-8f3f-a1ac985bcd79.png)
   
 ### Footer
   
 The Footer contains social media links (which open in a new tag) providing methods of contacting Release Eritrea. As well as the charity number and company number.
-  
-![Screenshot 2023-01-22 at 14 55 03](https://user-images.githubusercontent.com/103432143/213922433-05ba2140-9515-49ff-9bf3-4a3db5520d29.png)
+
+![Screenshot 2023-04-29 at 15 57 42](https://user-images.githubusercontent.com/103432143/235309330-eddf6932-e8b0-4bd3-8fcb-728f9a16ab0b.png)
   
 ### Info
   
@@ -252,17 +245,13 @@ The Info page provides information on the profiles (not User profiles) of the Re
   
 This data can be added, edited or deleted from the admin site.
   
-![Screenshot 2023-01-22 at 14 57 00](https://user-images.githubusercontent.com/103432143/213922529-c847e206-6602-444c-a21a-a34841fbae0f.png)
+![Screenshot 2023-04-29 at 15 57 57](https://user-images.githubusercontent.com/103432143/235309338-1d41982c-a95c-4d35-861f-f4f89ef0bc03.png)
 
-![Screenshot 2023-01-22 at 14 57 05](https://user-images.githubusercontent.com/103432143/213922532-d4ffa149-4a84-4d37-bf24-0e42767b4eb6.png)
+![Screenshot 2023-04-29 at 15 58 02](https://user-images.githubusercontent.com/103432143/235309340-fe80105e-9bee-4ca8-a6fc-fe0c59dc1191.png)
 
 ### Django Admin
   
 Django provides an authentication system that allows users to create accounts, login using their accounts and logout. Those with staff permissions can access the django admin site to make changes to the database. 
-  
-![Screenshot 2023-01-22 at 14 58 01](https://user-images.githubusercontent.com/103432143/213922600-8709738a-ea90-4987-a120-a6facf3aef84.png)
-  
-![Screenshot 2023-01-22 at 14 57 31](https://user-images.githubusercontent.com/103432143/213922607-dbf21a3e-ff41-4816-9f11-f6f5f3cb38dc.png)
 
 ![Screenshot 2023-01-22 at 14 59 29](https://user-images.githubusercontent.com/103432143/213922672-17077265-3a0a-4422-bb55-762df0a21c41.png)
 
@@ -438,16 +427,6 @@ Functional tests were carried out to ensure the features of the site were workin
 [Info Views Automatic Tests](https://github.com/Hasmelash95/release-eritrea/blob/main/info/views.py)
   
 ![Test Screenshot](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/testing/automatic-test-screenshot.png)
-
-### Responsive Design
-  
-[Home Page Mockups](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/mockups/home-page.png)
-  
-[Info Page Mockups](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/mockups/info-page.png)
-
-[Article Detail Mockups](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/mockups/article-detail.png)
-  
-[Article Filter Mockups](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/mockups/article-filter.png)
 
 ### Browser Compatibility 
   
