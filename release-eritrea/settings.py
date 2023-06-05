@@ -35,7 +35,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'releaseeritrea.org',
     'proclaim-release-eritrea.onrender.com',
-    'proc-release-eritrea.heroku.com',
+    'proc-release-eritrea.herokuapp.com',
     'localhost',
     '127.0.0.1',
     '0.0.0.0'
