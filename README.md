@@ -2,7 +2,7 @@
 
 ## Release Eritrea
 
-[Check out the deployed site](https://proclaim-release-eritrea.onrender.com/)
+[Check out the deployed site](https://proc-release-eritrea.herokuapp.com/)
 
 Proclaim! Release Eritrea is a human rights charity advocating for the persecuted Christians in Eritrea. It is a global partnership which advocates on behalf of victims of abuse by the PDFJ's (the ruling party of Eritrea) regime and provides humanitarian assistance to the victims and their families. The website offers updates to those who wish to learn more about the human rights abuses happening in Eritrea with press releases that logged in users can comment on and bookmark in their favorites. In addition, there are social media links and profiles of the members of Release Eritrea in case those visiting the site wish to get in touch and get involved. 
 
