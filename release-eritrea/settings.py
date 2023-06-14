@@ -33,9 +33,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'releaseeritrea.org',
     'proclaim-release-eritrea.onrender.com',
     'proc-release-eritrea.herokuapp.com',
+    'release-eritrea.org',
     'localhost',
     '127.0.0.1',
     '0.0.0.0'
