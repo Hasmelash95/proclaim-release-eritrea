@@ -509,11 +509,6 @@ footer {
 /* Media queries for very large screen sizes */
 @media screen and (min-width: 1600px) {
 
-    .article-box,
-    .what-do {
-        margin: 10px 30px;
-    }
-
     footer {
         font-size: 1.3rem;
     }
