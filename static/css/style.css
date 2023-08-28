@@ -450,6 +450,10 @@ footer {
         font-size: 1.15rem;
     }
 
+    .logo strong {
+        display: none;
+    }
+
     h3, 
     h4,
     h5,
@@ -461,6 +465,10 @@ footer {
     .verse-text {
         font-size: 0.7rem;
         width: 270px;
+    }
+
+    .verse h2 {
+        max-width: 300px;
     }
 
     .intro-text {
