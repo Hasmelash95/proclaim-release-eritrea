@@ -77,7 +77,8 @@ nav li {
 }
 
 .card,
-.btn {
+.btn,
+.toggler-btn {
     border-radius: 0;
 }
 
@@ -110,7 +111,7 @@ nav .active {
 /* Styling for sign in/logout and error pages */
 .sign-in,
 .error-pages {
-    margin: 180px 60px 100px;
+    margin: 250px 60px 100px;
     padding: 30px;
     max-width: 700px;
 }
@@ -224,7 +225,7 @@ div .log-msg {
 /* Styling for article detail and info page */
 .article-section,
 .who-section {
-    margin: 180px 50px 75px;
+    margin: 250px 50px 75px;
     padding: 30px;
     max-width: 1300px;
 }
@@ -265,7 +266,7 @@ div .log-msg {
 .location {
     max-width: 1000px;
     padding: 30px;
-    margin: 0 75px 75px 50px;
+    margin: 0 75px 100px 50px;
 }
 
 /* Styling for the comment section */
@@ -279,7 +280,7 @@ div .log-msg {
 }
 
 .comment-form {
-    margin: 10px 10px 50px 50px;
+    margin: 10px 10px 100px 50px;
     padding: 30px;
 }
 
