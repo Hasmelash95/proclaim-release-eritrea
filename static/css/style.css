@@ -47,9 +47,14 @@ h4,
     font-family: 'Noto Serif Oriya', serif;
 }
 
+h2 {
+    text-transform: uppercase;
+}
+
 /* Styling for the individual nav links */
 nav li {
-    margin-left: 10px;
+    margin-left: 20px;
+    text-transform: uppercase;
 }
 
 .nav-link:hover {
@@ -68,7 +73,12 @@ nav li {
 }
 
 .logo strong {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.card,
+.btn {
+    border-radius: 0;
 }
 
 /* Styling for the header logo */
@@ -366,6 +376,10 @@ footer {
         font-size: 1rem;
     }
 
+    .logo strong {
+        font-size: 1rem;
+    }
+
     textarea {
         width: 500px;
     }
@@ -384,10 +398,6 @@ footer {
 
     .intro-text {
         margin-top: 200px;
-    }
-
-    .logo strong {
-        font-size: 0.6rem;
     }
 
     span img {
@@ -426,10 +436,6 @@ footer {
     .contact {
         margin: 20px auto;
     }
-
-    i.fa-brands {
-        font-size: 1.5rem;
-    }
     
     .foot-logo {
         margin-top: 10px;
@@ -449,10 +455,6 @@ footer {
     h5,
     h6 {
         font-size: 1rem;
-    }
-
-    .logo strong {
-        font-size: 0.4rem;
     }
 
     .verse,

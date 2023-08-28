@@ -37,7 +37,8 @@ ALLOWED_HOSTS = [
     'www.release-eritrea.org',
     'localhost',
     '127.0.0.1',
-    '0.0.0.0'
+    '0.0.0.0',
+    '8000-hasmelash95-proclaimrel-30sztu3qtro.ws-eu104.gitpod.io'
 ]
 
 # Application definition
