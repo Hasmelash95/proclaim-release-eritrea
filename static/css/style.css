@@ -8,6 +8,9 @@
 :root {
     --accent-color: #96650f;
     --accent-color-hover: #7a5310;
+    /* Lighter gold for use on dark backgrounds, where the darker
+       accent-color doesn't have enough contrast to stay legible */
+    --accent-color-light: #d69e3c;
 }
 
 /* Resetting the margins and padding for the entire site */
@@ -279,6 +282,26 @@ div .log-msg {
 .location .card {
     width: 24rem;
     padding: 20px;
+    border-top: 4px solid var(--accent-color-light);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.who-section .card:hover,
+.location .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Uniform profile picture crop so team member cards line up evenly */
+.who-section .card-img-top {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.who-section .card-subtitle {
+    color: var(--accent-color-light);
 }
 
 .temporary {
