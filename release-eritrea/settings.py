@@ -32,11 +32,15 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    'release-eritrea.herokuapp.com', 
+    'release-eritrea.herokuapp.com',
+    'proc-release-eritrea.herokuapp.com',
+    'www.release-eritrea.org',
     'localhost',
-    '127.0.0.1', 
-    '8000-hasmelash95-releaseerit-kspyhrnwa8a.ws-eu98.gitpod.io'
-    ]
+    '127.0.0.1',
+    '0.0.0.0',
+    '8000-hasmelash95-releaseerit-kspyhrnwa8a.ws-eu98.gitpod.io',
+    '8000-hasmelash95-proclaimrel-30sztu3qtro.ws-eu104.gitpod.io',
+]
 
 # Application definition
 
@@ -128,9 +132,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'release-eritrea.wsgi.application'
 
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
 
 DATABASES = {
      'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
