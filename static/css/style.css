@@ -1,5 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Oriya:wght@500&family=Roboto:wght@300&display=swap');
-/* Importing Noto Serify Oriya and Roboto fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500&family=Roboto:wght@300&display=swap');
+/* Importing Noto Serif and Roboto fonts */
+
+/* Warm accent for links, hover states and calls-to-action, set apart
+   from the blue/charcoal base palette. Only used on light backgrounds
+   (navbar, cards, footer) - the contrast is too low on the blue body
+   background, so section headers etc. stay white. */
+:root {
+    --accent-color: #96650f;
+    --accent-color-hover: #7a5310;
+}
 
 /* Resetting the margins and padding for the entire site */
 * {
@@ -44,7 +53,7 @@ h2,
 h3,
 h4,
 .image-cards h5 {
-    font-family: 'Noto Serif Oriya', serif;
+    font-family: 'Noto Serif', serif;
 }
 
 h2 {
@@ -58,7 +67,18 @@ nav li {
 }
 
 .nav-link:hover {
-    color: rgb(135, 164, 173);
+    color: var(--accent-color);
+}
+
+/* Reskin Bootstrap's link-primary utility (used for Sign Up, Logout
+   and Edit article links) to the site's accent color */
+.link-primary {
+    color: var(--accent-color) !important;
+}
+
+.link-primary:hover,
+.link-primary:focus {
+    color: var(--accent-color-hover) !important;
 }
 
 /* The toggle button for smaller screens */
@@ -98,7 +118,9 @@ span img {
 
 /*  Nav links when page is active */
 nav .active {
+    color: var(--accent-color) !important;
     text-decoration: underline;
+    text-decoration-color: var(--accent-color);
 }
 
 /* Styling for links */
@@ -310,6 +332,21 @@ input {
     margin-bottom: 100px;
 }
 
+.filter-submit-btn {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+.filter-submit-btn:hover,
+.filter-submit-btn:focus {
+    background-color: var(--accent-color-hover);
+    color: #fff;
+}
+
+.no-results {
+    font-style: italic;
+}
+
 /* Styling the form submit buttons */
 .submit-btn {
     margin-top: 30px;
@@ -322,8 +359,51 @@ input {
     margin-left: 20px;
 }
 
+/* Thumbnail trigger for the gallery lightbox */
+.gallery-trigger {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
 .image-cards img {
-    max-height: 250px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 300ms ease;
+}
+
+.gallery-trigger:hover img,
+.gallery-trigger:focus img {
+    transform: scale(1.08);
+    outline: 3px solid var(--accent-color);
+    outline-offset: -3px;
+}
+
+/* Magnifying glass icon shown over the thumbnail on hover */
+.gallery-zoom-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.75rem;
+    background-color: rgba(33, 37, 42, 0.45);
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+.gallery-trigger:hover .gallery-zoom-icon,
+.gallery-trigger:focus .gallery-zoom-icon {
+    opacity: 1;
 }
 
 .gallery-section {
@@ -355,7 +435,7 @@ footer {
 }
 
 .contact i:hover {
-    color: rgb(17, 106, 170);
+    color: var(--accent-color);
 }
 
 /* Media queries for large screens */

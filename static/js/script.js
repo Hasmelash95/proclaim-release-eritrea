@@ -12,6 +12,9 @@ const logBtn = document.getElementsByClassName('log-btn')[0];
 const logMsg = document.getElementsByClassName('log-msg')[0];
 const scrollFadeIn = document.querySelectorAll('.fade-in');
 const presentYear = document.getElementById('current-year');
+const galleryTriggers = document.querySelectorAll('.gallery-trigger');
+const galleryModalImage = document.getElementById('galleryModalImage');
+const galleryModalLabel = document.getElementById('galleryModalLabel');
 
 /**
  * Event listener to ensure page loads before the functions
@@ -35,6 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (logBtn != undefined) {
         logBtn.addEventListener('click', logClick);
+    }
+
+    if (galleryTriggers.length) {
+        galleryTriggers.forEach(trigger => {
+            trigger.addEventListener('click', openGalleryModal);
+        });
     }
 });
 
@@ -113,6 +122,17 @@ function logClick() {
             logMsg.classList.add('visually-hidden');
         }
     }
+}
+
+/**
+ * Fills the gallery lightbox modal with the full-size image and
+ * title of the thumbnail that was clicked, before Bootstrap opens it.
+ */
+function openGalleryModal(event) {
+    const trigger = event.currentTarget;
+    galleryModalImage.src = trigger.dataset.fullSrc;
+    galleryModalImage.alt = trigger.dataset.title;
+    galleryModalLabel.textContent = trigger.dataset.title;
 }
 
 // Sets the year on the footer to the present year

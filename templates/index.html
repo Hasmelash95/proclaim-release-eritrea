@@ -184,27 +184,47 @@
 </main>
 <hr>
 <!-- Gallery -->
-<section id="gallery" class="gallery-section text-bg-secondary fade-in">
+<section id="gallery" class="gallery-section text-bg-dark fade-in">
    <h2 class="press-header section-headers">Gallery <i class="fa-solid fa-camera"></i></h2>
    <div class="row row-cols-1 row-cols-md-3 g-3">
       {% for pic in picture %}
       <div class="col text-center">
-         <div class="image-cards card text-bg-secondary border-0 mx-auto">
+         <div class="image-cards card text-bg-dark border-0 mx-auto">
             <h5 class="card-title">{{ pic.title }}</h5>
             {% if "temporary" in pic.image.url %}
-            <a href="https://res.cloudinary.com/dmdrwfzlx/image/upload/v1674065180/temporary_dewiqw.jpg" target="_blank"
-               aria-label="Opens image link in a new tab">
-            </a>
-            <img src="https://res.cloudinary.com/dmdrwfzlx/image/upload/v1674065180/temporary_dewiqw.jpg"
-               alt="Temporary image">
+            <button type="button" class="gallery-trigger" data-bs-toggle="modal" data-bs-target="#galleryModal"
+               data-full-src="https://res.cloudinary.com/dmdrwfzlx/image/upload/v1674065180/temporary_dewiqw.jpg"
+               data-title="{{ pic.title }}" aria-label="View larger image of {{ pic.title }}">
+               <img src="https://res.cloudinary.com/dmdrwfzlx/image/upload/v1674065180/temporary_dewiqw.jpg"
+                  alt="Temporary image">
+               <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            </button>
             {% else %}
-            <a href="{{ pic.image.url }}" target="_blank" aria-label="Opens image link in a new tab">
+            <button type="button" class="gallery-trigger" data-bs-toggle="modal" data-bs-target="#galleryModal"
+               data-full-src="{{ pic.image.url }}" data-title="{{ pic.title }}"
+               aria-label="View larger image of {{ pic.title }}">
                <img src="{{ pic.image.url }}" class="img-fluid border border-light" alt="{{ pic.alt }}">
-            </a>
+               <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            </button>
             {% endif %}
          </div>
       </div>
       {% endfor %}
    </div>
 </section>
+
+<!-- Gallery lightbox: shared modal populated with whichever thumbnail was clicked -->
+<div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content text-bg-dark">
+         <div class="modal-header border-0">
+            <h5 class="modal-title" id="galleryModalLabel"></h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body text-center">
+            <img id="galleryModalImage" src="" alt="" class="img-fluid">
+         </div>
+      </div>
+   </div>
+</div>
 {% endblock %}
