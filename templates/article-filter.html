@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %} Filter Search {% endblock %}
 {% block content %}
 <!-- Form to filter articles -->
-<section class="article-section container text-bg-secondary bg-gradient filtering">
+<section class="article-section container text-bg-dark bg-gradient filtering">
     <h2 class="press-header p-3">Search Filters <i class="fa-solid fa-magnifying-glass"></i></h2>
     <form class="p-3" method="get">
-        {{ filter.form }}
-        <button type="submit" class="btn filter-link btn-dark">Search</button>
+        {{ filter.form | crispy }}
+        <button type="submit" class="btn filter-link filter-submit-btn">Search</button>
     </form>
     <div class="row row-cols-1 row-cols-md-2 g-3">
         {% for article in filter.qs %}
@@ -23,6 +24,8 @@
             <a href="{% url 'delete' article.slug %}" aria-label="Link to the delete article form" class="link-danger">Delete article</a>
             {% endif %}
         </article>
+        {% empty %}
+        <p class="no-results p-3">No press releases match your search. Try widening your filters.</p>
         {% endfor %}
     </div>
 </section>
