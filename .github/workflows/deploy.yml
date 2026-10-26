@@ -3,6 +3,9 @@ name: CI/CD
 on:
   push:
     branches: [main]
+  # Adds a "Run workflow" button on the Actions tab. Any branch can be
+  # checked this way, but only main is ever deployed
+  workflow_dispatch:
 
 jobs:
   check:
@@ -30,6 +33,7 @@ jobs:
 
   deploy:
     needs: check
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
