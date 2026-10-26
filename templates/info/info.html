@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %} Who We Are {% endblock %}
 {% block content %}
 <!-- Section for members of the team -->
@@ -23,11 +24,15 @@
       {% endfor %}
    </div>
 </section>
-<!-- Contact section -->
-<section class="location">
-   <h2 class="section-headers">Get In Touch</h2>
-   <p class="text-white">Want to get involved or have a question for the team?
-      <a href="{% url 'contact' %}" class="link-info" aria-label="Link to the contact form">Send us a message</a>.
-   </p>
+<!-- Contact form, messages are read by staff in the admin -->
+<section class="sign-in contact-section text-bg-dark bg-gradient" id="contact">
+   <h2 class="section-headers mt-0">Get In Touch</h2>
+   <p>Have a question, want to get involved or need to reach the team? Send us a message and we'll get back to you.</p>
+   {% include 'includes/messages.html' %}
+   <form method="post" action="{% url 'info' %}#contact">
+      {% csrf_token %}
+      {{ contact_form | crispy }}
+      <button type="submit" class="btn btn-light mt-3">Send Message</button>
+   </form>
 </section>
 {% endblock %}

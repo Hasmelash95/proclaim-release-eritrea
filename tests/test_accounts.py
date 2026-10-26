@@ -30,6 +30,12 @@ class TestingAccounts(TestCase):
         self.assertTemplateUsed(response, 'base.html')
         self.assertTemplateUsed(response, 'account/logout.html')
 
+    # The password reset link stays hidden until email sending is set up
+    def test_no_reset_link(self):
+        response = self.client.get(reverse('account_login'))
+        self.assertNotContains(response, 'Forgot your password')
+        self.assertNotContains(response, reverse('account_reset_password'))
+
     # Testing whether a user can sign in
     def test_sign_in(self):
         response = self.client.post(reverse('account_login'),
