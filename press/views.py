@@ -15,7 +15,7 @@ class PressList(generic.ListView):
     article list views and picture list views.
     """
     model = Article
-    queryset = Article.objects.order_by('-created_on')
+    queryset = Article.objects.order_by('-published_on', '-created_on')
     template_name = 'index.html'
     paginate_by = 6
     context_object_name = 'article'

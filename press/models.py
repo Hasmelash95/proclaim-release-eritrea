@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Model
 from django.contrib.auth.models import User
+from django.utils import timezone
 from cloudinary.models import CloudinaryField
 
 # Tags for the articles
@@ -17,6 +18,9 @@ class Article(models.Model):
                                related_name='press_releases')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    # The date the press release was published, which can be earlier than
+    # created_on for older releases added to the site later
+    published_on = models.DateField(default=timezone.localdate)
     content = models.TextField()
     excerpt = models.TextField(blank=True)
     favorites = models.ManyToManyField(User, related_name='favorite',
@@ -24,7 +28,7 @@ class Article(models.Model):
     tags = models.IntegerField(choices=TAGS, default=0)
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['-published_on', '-created_on']
 
     def __str__(self):
         return self.title

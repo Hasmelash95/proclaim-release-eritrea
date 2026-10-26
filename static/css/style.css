@@ -506,6 +506,11 @@ footer {
         margin-top: 200px;
     }
 
+    /* Brings the team section up closer under the nav bar */
+    .who-section {
+        margin-top: 130px;
+    }
+
     span img {
         width: 75px;
         height: 75px;
@@ -640,6 +645,12 @@ footer {
         margin-bottom: 40px;
     }
 }
+/* The contact form sits under the team, so it doesn't need the large
+   top margin .sign-in uses to clear the fixed nav bar */
+.contact-section {
+    margin-top: 0;
+}
+
 /* Contact form spam trap, kept off screen so only bots fill it in */
 .contact-section #div_id_website {
     position: absolute;
@@ -660,4 +671,10 @@ footer {
 .gallery-section > .row {
     margin-left: 0;
     margin-right: 0;
+}
+
+/* Form hints are dark grey by default, which is hard to read on the
+   dark form backgrounds */
+.text-bg-dark .form-text.text-muted {
+    color: #ced4da !important;
 }

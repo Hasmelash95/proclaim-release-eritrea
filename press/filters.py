@@ -9,14 +9,14 @@ class ArticleFilter(django_filters.FilterSet):
     """
     title = django_filters.CharFilter(lookup_expr='icontains',
                                       label='Title contains')
-    created_on = django_filters.DateFromToRangeFilter(
-        label='Posted between',
+    published_on = django_filters.DateFromToRangeFilter(
+        label='Published between',
         widget=django_filters.widgets.RangeWidget(attrs={'type': 'date'}))
     ordering = django_filters.OrderingFilter(
         label='Sort by',
         choices=(
-            ('-created_on', 'Newest first'),
-            ('created_on', 'Oldest first'),
+            ('-published_on', 'Newest first'),
+            ('published_on', 'Oldest first'),
         ),
     )
 

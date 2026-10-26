@@ -8,7 +8,7 @@ class ArticleAdmin(SummernoteModelAdmin):
     """
     The view on the admin site for the Article model
     """
-    list_display = ('title', 'created_on', 'updated_on')
+    list_display = ('title', 'published_on', 'tags', 'created_on')
     list_filter = ('tags', 'favorites', 'author')
     summernote_fields = ('content')
     prepopulated_fields = {'slug': ('title',)}

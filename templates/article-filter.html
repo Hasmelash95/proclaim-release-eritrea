@@ -17,7 +17,7 @@
                 <h4 class="card-header"> {{ article.title }} </h4>
                     <p class="card-text"> Author: Release Eritrea </p>
                     <p class="card-text"> {{ article.excerpt }} </p>
-                    <p><em>Posted on {{ article.created_on }}</em></p>
+                    <p><em>Published on {{ article.published_on }}</em></p>
             </a>
             {% if user.is_staff %}
             <a href="{% url 'edit-article' article.slug %}" aria-label="Link to the edit article form" class="link-primary">Edit article</a>
