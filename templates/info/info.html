@@ -23,20 +23,11 @@
       {% endfor %}
    </div>
 </section>
-<!-- Section for charity offices -->
+<!-- Contact section -->
 <section class="location">
-   <h2 class="section-headers">Our Offices</h2>
-   <div class="row row-cols-1 row-cols-md-2 gap-3 g-4">
-      {% for loc in location %}
-      <div class="col card text-bg-dark bg-gradient">
-         <div class="card-body">
-            <h4 class="card-title">{{ loc.name }}</h4>
-            <p class="card-text">{{ loc.street_name }}</p>
-            <p class="card-text">{{ loc.city }}</p>
-            <p class="card-text">{{ loc.post_code }}</p>
-         </div>
-      </div>
-      {% endfor %}
-   </div>
+   <h2 class="section-headers">Get In Touch</h2>
+   <p class="text-white">Want to get involved or have a question for the team?
+      <a href="{% url 'contact' %}" class="link-info" aria-label="Link to the contact form">Send us a message</a>.
+   </p>
 </section>
 {% endblock %}

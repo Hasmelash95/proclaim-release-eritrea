@@ -637,3 +637,8 @@ footer {
         margin-bottom: 40px;
     }
 }
+/* Contact form spam trap, kept off screen so only bots fill it in */
+.contact-section #div_id_website {
+    position: absolute;
+    left: -10000px;
+}

@@ -54,6 +54,10 @@
                      aria-current="page{% endif %}" href="{% url 'info' %}" aria-label="Link to info page">
                      <strong>The Team</strong></a>
                   </li>
+                  <li class="nav-item"><a class="nav-link link-dark {% if url_name == 'contact' %}active"
+                     aria-current="page{% endif %}" href="{% url 'contact' %}" aria-label="Link to contact page">
+                     <strong>Contact</strong></a>
+                  </li>
                   {% if user.is_authenticated %}
                   <li class="nav-item nav-link text-dark"><strong>Hello {{ user }}! </strong><a
                      href="{% url 'account_logout' %}" aria-label="Link to logout page" class="link-primary">Logout</a></li>
