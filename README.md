@@ -2,9 +2,13 @@
 
 ## Release Eritrea
 
-[Check out the deployed site](https://proc-release-eritrea.herokuapp.com/)
+[![CI/CD](https://github.com/Hasmelash95/proclaim-release-eritrea/actions/workflows/deploy.yml/badge.svg)](https://github.com/Hasmelash95/proclaim-release-eritrea/actions/workflows/deploy.yml)
 
-Proclaim! Release Eritrea is a human rights charity advocating for the persecuted Christians in Eritrea. It is a global partnership which advocates on behalf of victims of abuse by the PDFJ's (the ruling party of Eritrea) regime and provides humanitarian assistance to the victims and their families. The website offers updates to those who wish to learn more about the human rights abuses happening in Eritrea with press releases that logged in users can comment on and bookmark in their favorites. In addition, there are social media links and profiles of the members of Release Eritrea in case those visiting the site wish to get in touch and get involved. 
+[Check out the deployed site](https://www.release-eritrea.org/)
+
+Proclaim! Release Eritrea is a human rights charity advocating for the persecuted Christians in Eritrea. It is a global partnership which advocates on behalf of victims of abuse by the PFDJ's (the ruling party of Eritrea) regime and provides humanitarian assistance to the victims and their families. The website offers updates to those who wish to learn more about the human rights abuses happening in Eritrea with press releases that logged in users can comment on and bookmark in their favorites. In addition, there are social media links, profiles of the members of Release Eritrea and a contact form for those visiting the site who wish to get in touch and get involved. 
+
+The site was first built in 2023 and has since been maintained for the charity: upgraded to Django 5.2, given an automated test and deployment pipeline, made to work properly on phones and extended with a contact form. See [Maintenance and Updates](#maintenance-and-updates).
 
 ![Screenshot 2023-04-29 at 15 41 19](https://user-images.githubusercontent.com/103432143/235308643-bd39de01-a7dd-4d77-83ef-3ee54d2e95a8.png)
 
@@ -14,7 +18,6 @@ Proclaim! Release Eritrea is a human rights charity advocating for the persecute
 * [Strategy](#strategy)
 * [Scope](#scope)
 * [Structure](#structure)
-* [Skeleton](#skeleton)
 * [Surface](#surface)
 
 [Features](#features)
@@ -24,14 +27,18 @@ Proclaim! Release Eritrea is a human rights charity advocating for the persecute
 * [Gallery](#gallery)
 * [Footer](#footer)
 * [Info](#info)
+* [Contact Form](#contact-form)
 * [Error Pages](#error-pages)
 * [Future Features](#future-features)
+
+[Maintenance and Updates](#maintenance-and-updates)
 
 [Technologies Used](#technologies-used)
 
 [Testing](#testing)
 * [Validation](#validation)
 * [Performance](#performance)
+* [Automated Tests](#automated-tests)
 * [Functional](#functional)
 * [Browser Compatibility](#browser-compatibility)
 * [Testing User Stories](#testing-user-stories)
@@ -111,7 +118,7 @@ Theme - View and Edit Content
   
 The website will contain user authentication to allow those with staff permissions to log in and access the admin database and those with user permissions to comment and favorite posts. 
   
-A single page will contain the About Us section (which will contain external links to partner charities and another page with information on the Team and Release Eritrea offices). The main page will provide a list of Press Releases which can be navigated through using pagination. Clicking on any one of these will take the user to the article detail page where they can comment - which will be processed for admin approval - and favorite the article. The home page will also contain a gallery section which can be edited by admin. 
+A single page will contain the About Us section (which will contain external links to partner charities and another page with information on the Team and a contact form). The main page will provide a list of Press Releases which can be navigated through using pagination. Clicking on any one of these will take the user to the article detail page where they can comment - which will be processed for admin approval - and favorite the article. The home page will also contain a gallery section which can be edited by admin. 
   
 There will be links to allow users to access their favorites page and the search filter page to filter articles by tags and title content. 
   
@@ -121,55 +128,79 @@ Social media links will be available on the footer along with the charity and co
 
 ### Structure
 
-The logo at the header contains a link to the home page. Navigation links on the header allow users to navigate to the Home and the three sections on the home page, About Us, Press Releases, Gallery. Another link takes the user to the info page. User authentication links are also present on the header to take users to the log in, sign up or logout pages. 
+The logo at the header contains a link to the home page. Navigation links on the header allow users to navigate to the Home and the three sections on the home page, About Us, Press Releases, Gallery. Another link takes the user to the info page, and a Contact link jumps to the contact form on that page. User authentication links are also present on the header to take users to the log in, sign up or logout pages. 
   
 The Press Releases section shows 6 article previews a page and clicking on any of the previews takes the user to that specific article. Attempting to access an article that has been deleted will raise a 404 error and the users will be taken to a custom 404 error page. 
   
-ERD (courtesy of Visual Paradigm Online)
-  
-The Picture, Location and Profile Models (Profile of Members of Release Eritrea rather than User Profile) do not have relationships with other entities. 
-  
-The Article ID has One-to-Many relationship with the Comment Model. The User Model has a One-to-Many relationship with the Article ID, a One-to-Many relationship with the Comment Model and a Many-to-Many relationship with the favorities attribute within the Article Model. 
-  
-![Screenshot 2023-01-17 at 23 02 49](https://user-images.githubusercontent.com/103432143/213031512-17ce36b8-9297-49c6-bc38-ded22e0ae8d6.png)
+#### Data Model
 
-![Screenshot 2023-01-17 at 23 17 37](https://user-images.githubusercontent.com/103432143/213033387-1ab8cf09-1917-47a8-a24a-92fba9ffecbe.png)
+```mermaid
+erDiagram
+    USER ||--o{ ARTICLE : writes
+    USER ||--o{ COMMENT : writes
+    ARTICLE ||--o{ COMMENT : has
+    USER }o--o{ ARTICLE : favorites
 
-### Skeleton
+    USER {
+        int id PK
+        string username
+        string email
+        bool is_staff
+    }
+    ARTICLE {
+        int id PK
+        string title UK
+        string slug UK
+        int author_id FK
+        date published_on "shown on the site"
+        datetime created_on
+        datetime updated_on
+        text content
+        text excerpt
+        int tags "Real Time or Archive"
+    }
+    COMMENT {
+        int id PK
+        int article_id FK
+        int user_id FK
+        text subject
+        text content
+        bool approved
+        datetime created_on
+        datetime updated_on
+    }
+    PICTURE {
+        int id PK
+        string title UK
+        string slug UK
+        image image "Cloudinary"
+        text alt
+        datetime created_on
+    }
+    PROFILE {
+        int id PK
+        string first_name
+        string last_name
+        string email
+        string job_title
+        image image "Cloudinary"
+        text about
+        datetime created_on
+    }
+    CONTACT_MESSAGE {
+        int id PK
+        string name
+        string email
+        string subject
+        text message
+        bool handled
+        datetime created_on
+    }
+```
 
-#### Wireframes
-  
-[Home](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/home.png)
-  
-[Home mobile](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/home-mob.png)
-  
-[Article Detail](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/article-detail.png)
-  
-[Article Detail mobile](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/article-detail-mob.png)
+User is Django's built in user model. An article has one author and many comments, each comment belongs to one user, and users can add many articles to their favorites (a many-to-many relationship).
 
-[Article Filter](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/article-filter.png)
-  
-[Article Filter mobile](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/article-filter-mob.png)
-  
-[Info](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/info.png)
-  
-[Info mobile](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/info-mob.png)
-  
-[Article Form](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/article-form.png)
-  
-[Article Form mobile](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/article-form-mob.png)
-  
-[Favorites](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/favorites.png)
-  
-[Favorites mobile](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/favorities-mob.png)
-  
-[Sign In](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/sign-in.png)
-  
-[Sign In mobile](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/sign-in-mob.png)
-  
-[Logout](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/logout.png)
-  
-[Logout mob](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/wireframes/logout-mob.png)
+Picture (the gallery), Profile (members of Release Eritrea, not user profiles) and ContactMessage (messages from the contact form) have no relationships with other models. The Location model from the original release still exists to keep its data but is no longer shown on the site, so it is left out of the diagram.
 
 ### Surface 
 
@@ -184,99 +215,93 @@ A fade in effect is triggered when an object is visible to the user - some eleme
 ### Header and Hero
   
 The header contains the logo of Release Eritrea along with the name (a bird breaking a chain) along with the nav elements (in the toggler) which take the users to specific sections of the page or to other sites within the page. There are Sign In and Sign Up options for users who have not been authenticated with links to the relevant pages. 
-  
-![Screenshot 2023-04-29 at 15 43 59](https://user-images.githubusercontent.com/103432143/235308724-eb8b686c-db7f-4097-a349-8cd80a67ae9f.png)
 
 If the User has already signed in, a 'Hello, [User Name]!' appears along with a Logout link. 
 
 The header remains on screen as the user scrolls to allow for easy navigation. The active page is underlined (in this case, the home page). 
-  
-The hero image of a hand holding chains is adjacent to a verse (recommended by the client). This fades into view when the page has loaded. 
-  
-![Screenshot 2023-04-29 at 15 45 27](https://user-images.githubusercontent.com/103432143/235308778-4227dc31-dd71-42e7-88f5-28b886746063.png)
   
 ### About Us
 
 The About Us section introduces visitors of the site to Release Eritrea and provides them information (simplified) to introduce them to the charity and what they do.
 
 In addition, links are provided to give users additional resources, such as links to the Team Page and external links to partner charity websites (which open in another tab).
-  
-![Screenshot 2023-04-29 at 15 46 13](https://user-images.githubusercontent.com/103432143/235308814-629c1ba5-499b-423c-8241-3ea1a87c479d.png)
-
-![Screenshot 2023-04-29 at 15 46 45](https://user-images.githubusercontent.com/103432143/235308833-5b4f2f6c-bd6b-4e7a-85f0-521cf2e70940.png)
 
 ### Press Releases
   
 The main draw of the site is of course the press releases. Previews with links to the detailed pages of the articles allow users to peruse through the many pages and click on whichever article captures their attention. 
   
-![Screenshot 2023-04-29 at 15 54 49](https://user-images.githubusercontent.com/103432143/235309182-2701ee73-8e8b-4a2f-ac26-edb356afcab3.png)
-  
 Article detail pages have a comment section with a comment form, the latter of which is only visible to logged in users. Comments must be approved by the admin to be visible under the article.
-  
-![Screenshot 2023-01-22 at 14 49 12](https://user-images.githubusercontent.com/103432143/213922278-d2ea1186-9343-4b4d-a4d2-7d94f9d96057.png)
-
-![Screenshot 2023-01-22 at 14 50 21](https://user-images.githubusercontent.com/103432143/213922289-eba7c310-e47b-429b-b61e-fbcb5dbf63bc.png)
 
 Admin may click on the edit or delete buttons, or post a new article article from that section. There are also buttons to direct users to the Favorites or Search Filter pages.
   
-![Screenshot 2023-01-23 at 15 10 34](https://user-images.githubusercontent.com/103432143/214075282-0581d278-6df1-4ef9-b8ee-88b088f4a4e6.png)
-
-![Screenshot 2023-01-25 at 05 27 53](https://user-images.githubusercontent.com/103432143/214487232-ae405d81-d9c5-4fdd-9e8c-c2c30fd81abc.png)
-  
 The Search Filter page allows users to find the article they need through tags or words or phrases in the title.
-  
-![Screenshot 2023-04-29 at 15 55 53](https://user-images.githubusercontent.com/103432143/235309221-b6349b1c-69be-4011-abeb-7aca73a55fc7.png)
 
 ### Gallery
   
 The Gallery section shows users official Release Eritrea pictures for a visual sense of what the organisation does. Admin can add, edit and delete pictures via the admin page. 
   
-![Screenshot 2023-04-29 at 15 57 32](https://user-images.githubusercontent.com/103432143/235309320-df4af13c-5c90-4f54-8f3f-a1ac985bcd79.png)
-  
 ### Footer
   
 The Footer contains social media links (which open in a new tag) providing methods of contacting Release Eritrea. As well as the charity number and company number.
-
-![Screenshot 2023-04-29 at 15 57 42](https://user-images.githubusercontent.com/103432143/235309330-eddf6932-e8b0-4bd3-8fcb-728f9a16ab0b.png)
   
 ### Info
   
-The Info page provides information on the profiles (not User profiles) of the Release Eritrea staff and team members with contact details in case users wish to get in touch with them directly. Locations details are also available. 
+The Info page provides information on the profiles (not User profiles) of the Release Eritrea staff and team members with contact details in case users wish to get in touch with them directly. The office locations section was later replaced by a contact form, as the charity has no public office addresses. 
   
 This data can be added, edited or deleted from the admin site.
-  
-![Screenshot 2023-04-29 at 15 57 57](https://user-images.githubusercontent.com/103432143/235309338-1d41982c-a95c-4d35-861f-f4f89ef0bc03.png)
 
-![Screenshot 2023-04-29 at 15 58 02](https://user-images.githubusercontent.com/103432143/235309340-fe80105e-9bee-4ca8-a6fc-fe0c59dc1191.png)
+### Contact Form
+
+The team page ends with a "Get In Touch" form where anyone can send a message with their name, email, subject and message. Messages are saved to the database rather than emailed, and staff read them in the Django admin, where they can tick each one off as handled.
+
+A hidden "honeypot" field protects the form from spam: it is invisible to people, but spam bots fill in every field, so messages with it filled in are quietly discarded.
 
 ### Django Admin
   
 Django provides an authentication system that allows users to create accounts, login using their accounts and logout. Those with staff permissions can access the django admin site to make changes to the database. 
 
-![Screenshot 2023-01-22 at 14 59 29](https://user-images.githubusercontent.com/103432143/213922672-17077265-3a0a-4422-bb55-762df0a21c41.png)
-
 ### Error Pages
   
 Raising 400, 403, 404, 405 and 500 errors redirects the user to custom error pages with links to return to the home page.
-  
-Error page for a 404 error:
-  
-![Screenshot 2023-01-22 at 15 24 24](https://user-images.githubusercontent.com/103432143/213923915-eea4c96f-cc1a-4bac-a4c8-c8b21761bd9f.png)
 
 ### Future Features
   
-1. Items that were marked won't do in this iteration. Allow Users to Edit comments, which will then need to be re-approved by the Admin. [In the To Do section](https://github.com/users/Hasmelash95/projects/3).
-2. Items that were marked won't do in this iteration. Add a Donation feature via debit card and paypal. [In the To Do section](https://github.com/users/Hasmelash95/projects/3).
-3. Add a Contact Us page to allow users to send direct messages to the organisation from the website. 
-4. Offer a subscription service which will give users alerts when a new article is added to the site.
+1. Add a Donation feature via debit card and paypal. 
+2. Send email notifications for new contact messages and enable password resets, once email sending is set up.
+
+Contact Us, has since been added (see [Contact Form](#contact-form)).
   
+## Maintenance and Updates
+
+After the original release, the site was updated to keep it secure, supported and easier to maintain.
+
+### Django 5.2 upgrade
+
+* Upgraded from Django 4.2 to **Django 5.2** (the current long term support release) and from Python 3.9 to **Python 3.11**, along with django-allauth, django-filter, django-taggit, crispy forms and WhiteNoise.
+* Replaced the `STATICFILES_STORAGE` and `DEFAULT_FILE_STORAGE` settings, which Django 5.1 removed, with `STORAGES`. Static files are now served by WhiteNoise with compressed, cache-busting file names, while uploaded images stay on Cloudinary.
+* Removed unedited copies of django-allauth templates that no longer worked with allauth 65, keeping only the styled sign in, sign up and sign out pages.
+* Pinned the Python version for Heroku with `.python-version`.
+
+### Continuous integration and deployment
+
+Every push to `main` runs a [GitHub Actions workflow](.github/workflows/deploy.yml):
+
+1. **Check:** installs the requirements, runs Django's system check, checks for missing migrations, collects static files and runs the automated tests.
+2. **Deploy:** only if every check passes, pushes the code to Heroku.
+
+Database migrations run automatically on each deploy through a release phase in the `Procfile`. If a migration fails, the release is cancelled and the previous version stays live. The workflow can also be run by hand from the Actions tab to check any branch without deploying it.
+
+### Mobile layout fixes
+
+Pages were slightly wider than the screen on phones, which cut off the menu button and the edge of the text. Measuring every element at phone widths found three causes: Bootstrap `.row` elements used without a container (adding negative side margins), cards combining `width: 100%` with a margin, and a minimum width on the hero verse that was wider than a phone. All pages now fit the screen at common phone widths (360 to 414px).
+
 ## Technologies Used 
   
 HTML5
   
 CSS3
   
-Python 
+Python 3.11
   
 JavaScript
   
@@ -286,7 +311,13 @@ Git
   
 Heroku
 
-Django
+[Django 5.2](https://www.djangoproject.com/)
+
+[django-allauth](https://docs.allauth.org/)
+
+PostgreSQL
+
+[GitHub Actions](https://docs.github.com/en/actions)
   
 [Bootstrap v5.3](https://getbootstrap.com/)
 
@@ -303,130 +334,45 @@ Django
 ## Testing
 
 ### Validation
-  
-JavaScript was run on [JSHint](https://jshint.com/) and showed no errors. 
-  
-Python code was run on [PEP8](https://pep8ci.herokuapp.com/) and showed no errors.
 
-![Screenshot 2023-01-25 at 05 32 35](https://user-images.githubusercontent.com/103432143/214487771-281f2329-94f9-48cf-a8e0-8fc85cf90996.png)
+The validation and performance checks below were carried out for the original release in 2023.
 
-CSS style sheet was run through W3C CSS Validator [Jigsaw](https://jigsaw.w3.org/css-validator/validator) with no errors. 
-  
-![Screenshot 2023-01-23 at 15 26 19](https://user-images.githubusercontent.com/103432143/214079247-159c9e01-e4dc-4d52-a7ca-97f396e3cb37.png)
-
-The Home Page was run through [W3C Markup Validator](https://validator.w3.org/) with no errors.
-
-![Screenshot 2023-01-23 at 15 30 57](https://user-images.githubusercontent.com/103432143/214080111-2791ea55-b067-48d5-8791-cc1b90d4c37c.png)
-
-Info Page 
-  
-![Screenshot 2023-01-23 at 15 32 28](https://user-images.githubusercontent.com/103432143/214080284-3cee95b7-415b-4a81-a09a-a1f1aec9f8de.png)
-  
-Article Detail 
-
-![Screenshot 2023-01-23 at 15 46 22](https://user-images.githubusercontent.com/103432143/214083527-668433dd-e319-4fd4-b4ba-6cfb388ee875.png)
-
-Post and Edit Article were run through the validator and showed no errors in the custom code except:
-
-![Screenshot 2023-01-23 at 15 48 01](https://user-images.githubusercontent.com/103432143/214083892-9d04fa4e-c6c0-484c-ad53-b31e18798817.png)
-
-This is the result of a Django widget. This isn't available in the django-summernote templates so could not be adjusted.
-  
-Delete Article
-  
-![Screenshot 2023-01-23 at 15 49 37](https://user-images.githubusercontent.com/103432143/214084314-ef4a37d3-8c1c-4709-a30b-002ae89e0d86.png)
-  
-Add/Remove from Favorites
-  
-![Screenshot 2023-01-25 at 05 35 24](https://user-images.githubusercontent.com/103432143/214488094-f24cbba7-cb67-4339-8d4b-41cdbaf90485.png)
-
-Favorites 
-  
-![Screenshot 2023-01-25 at 05 36 09](https://user-images.githubusercontent.com/103432143/214488159-459ba9ed-e8c9-40ca-8b84-6dc11a8b8a10.png)
-  
-Search Filters
-  
-![Screenshot 2023-01-25 at 05 36 50](https://user-images.githubusercontent.com/103432143/214488238-1dbce5d9-8f89-4430-9d34-cf248fd87f78.png)
-  
-Error 404 
-  
-![Screenshot 2023-01-25 at 05 37 45](https://user-images.githubusercontent.com/103432143/214488403-0879a2ce-7a63-4e57-ba32-ee61424acf14.png)
-  
-Sign In
-
-![Screenshot 2023-01-25 at 05 39 39](https://user-images.githubusercontent.com/103432143/214488616-cd9724b3-b289-4870-a604-a881ee33a0de.png)
-  
-Logout 
-  
-![Screenshot 2023-01-25 at 05 38 43](https://user-images.githubusercontent.com/103432143/214488505-ad3e23d3-195e-4571-a9c8-92e149c0e128.png)
-
-Sign Up 
-  
-![Screenshot 2023-01-25 at 05 41 08](https://user-images.githubusercontent.com/103432143/214488802-9f3a7e39-c2d8-4901-a2bd-fe097b32eb60.png)
+* **JavaScript** was run through [JSHint](https://jshint.com/) with no errors.
+* **Python** was run through the [PEP8 linter](https://pep8ci.herokuapp.com/) with no errors.
+* **CSS** was run through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator) with no errors.
+* **HTML** for every page was run through the [W3C Markup Validator](https://validator.w3.org/) with no errors in the custom code. The only errors are on the post and edit article pages, from attributes in a django-summernote widget that can't be changed from the project's templates.
 
 ### Performance
-  
-Lighthouse tests were run for each of the pages on the site:
-  
-Home
-  
-![Screenshot 2023-01-23 at 15 58 56](https://user-images.githubusercontent.com/103432143/214089235-e0ac8729-2224-4a33-8952-e1f496141139.png)
-  
-Info
-  
-![Screenshot 2023-01-23 at 15 59 44](https://user-images.githubusercontent.com/103432143/214089275-9be730ea-ba44-49e1-8df8-897229de2314.png)
-  
-Logout
 
-![Screenshot 2023-01-23 at 16 00 20](https://user-images.githubusercontent.com/103432143/214089304-6d5ab95a-675d-4f2c-9913-6dbf914828eb.png)
+[Lighthouse](https://developer.chrome.com/docs/lighthouse) reports were run for every page of the site.
 
-Sign In
-  
-![Screenshot 2023-01-23 at 16 00 47](https://user-images.githubusercontent.com/103432143/214089325-edea0742-36fc-4557-aaee-38a7950e4066.png)
-  
-Sign Up
-  
-![Screenshot 2023-01-23 at 16 01 22](https://user-images.githubusercontent.com/103432143/214089370-70299a76-b267-4b0c-b49a-71e1e179f982.png)
-  
-Post Article
-  
-![Screenshot 2023-01-23 at 16 02 36](https://user-images.githubusercontent.com/103432143/214089409-9221c00a-3820-4855-87e3-0fed8a04175e.png)
-  
-Edit Article
-  
-![Screenshot 2023-01-23 at 16 04 08](https://user-images.githubusercontent.com/103432143/214089437-b90f5f37-eb0b-47a5-95de-79be433bf0c7.png)
-  
-Article Detail
-  
-![Screenshot 2023-01-23 at 16 03 38](https://user-images.githubusercontent.com/103432143/214089479-02acceed-8f88-4b27-9331-4a5174a57463.png)
+### Automated Tests
 
-Delete Article
-  
-![Screenshot 2023-01-23 at 16 05 07](https://user-images.githubusercontent.com/103432143/214089510-578a55e0-af42-4228-93fb-640059fb4e47.png)
-  
-Add/Remove from favorites
-  
-![Screenshot 2023-01-23 at 16 05 36](https://user-images.githubusercontent.com/103432143/214089538-11156f87-233f-447a-90de-7afee675e62f.png)
+The site has a suite of Django tests that run on every push as part of the [CI/CD workflow](#continuous-integration-and-deployment), so nothing is deployed unless they pass. Each file covers one area:
 
-Favorites
-  
-![Screenshot 2023-01-23 at 16 06 08](https://user-images.githubusercontent.com/103432143/214089581-debda9da-e74a-4d6e-acde-0aecd35c0b38.png)
-  
-Search Filters
-  
-![Screenshot 2023-01-23 at 16 06 42](https://user-images.githubusercontent.com/103432143/214089621-5dc1940f-2eca-460e-bfa9-38eeea96a77a.png)
+| File | What it tests |
+|---|---|
+| [press/tests/test_views.py](press/tests/test_views.py) | Home, article detail, filter and favorites pages; posting, editing and deleting articles; comments; adding and removing favorites |
+| [press/tests/test_permissions.py](press/tests/test_permissions.py) | Only staff can post, edit and delete articles; favorites need a signed in user |
+| [info/tests/test_views.py](info/tests/test_views.py) | The team page |
+| [info/tests/test_contact.py](info/tests/test_contact.py) | Sending a message, invalid messages, and spam being discarded |
+| [tests/test_accounts.py](tests/test_accounts.py) | Sign in, sign up and sign out pages and flows |
+| [tests/test_errors.py](tests/test_errors.py) | The custom 404 page |
+
+Tests that belong to one app live in that app's `tests` folder, and site-wide tests live in the top-level `tests` folder.
+
+To run them locally with a throwaway SQLite database:
+
+```
+DATABASE_URL=sqlite:///db.sqlite3 python manage.py collectstatic --noinput
+DATABASE_URL=sqlite:///db.sqlite3 python manage.py test
+```
 
 ### Functional
   
 Functional tests were carried out to ensure the features of the site were working correctly. 
   
-[Manual Functional Tests](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/testing/functional-tests.pdf)
-
-[Press Views Automatic Tests](https://github.com/Hasmelash95/release-eritrea/blob/main/press/tests.py)
-
-[Info Views Automatic Tests](https://github.com/Hasmelash95/release-eritrea/blob/main/info/views.py)
-  
-![Test Screenshot](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/testing/automatic-test-screenshot.png)
+[Manual Functional Tests](README-assets/testing/functional-tests.pdf)
 
 ### Browser Compatibility 
   
@@ -438,7 +384,7 @@ User Stories were tested for whether they fulfilled the acceptance criteria defi
   
 The only exception are those User Stories that were labelled "won't do" as they'll be added in the next iteration.
   
-[User Stories Test](https://github.com/Hasmelash95/release-eritrea/blob/main/README-assets/testing/release-user-stories.pdf)
+[User Stories Test](README-assets/testing/release-user-stories.pdf)
 
 ## Bugs and Fixes
   
@@ -448,27 +394,34 @@ The only exception are those User Stories that were labelled "won't do" as they'
   3. The spinner showed up when the user clicked the sign in/sign up buttons even if the input was empty. If statements were added to ensure the spinner showed up when the required fields were filled in. 
   4. Summernote was creating validation errors due to attributes used in the widget. This was resolved by copying the iframe file (found in the summernote div github) into a template in my directory and manually removing the attributes. 
   
+  5. Pages were wider than the screen on phones, cutting off the menu button. Fixed by removing the negative margins of Bootstrap rows used without a container and replacing a `width: 100%` plus margin combination with `width: auto` (see [Mobile layout fixes](#mobile-layout-fixes)).
+  6. After upgrading to django-allauth 65, old copies of allauth templates in the project broke some account pages. Fixed by removing the unedited copies so allauth's own templates are used.
+  7. On Django 5.1+, the Cloudinary package's `collectstatic` command failed because it reads the removed `STATICFILES_STORAGE` setting. Fixed by serving static files with WhiteNoise and keeping Cloudinary for uploaded images only.
+  
   ### Unfixed Bugs
   1. There are no unfixed bugs remaining, besides the validation error triggered in the form pages due to the presence of an django widget that could not be adjusted.
 
 ## Deployment
 
 ### Deploying the App
-1. Create a Heroku account or log in if you have one.
-2. Click on the "Create new app" button on the dashboard.
-3. Give the app a unique name. 
-4. Select your region.
-5. On the resources tab, select the 'Heroku Postgres' add on.
-6. Click on the settings tab.
-7. Add a Config Var with the key PORT and the value 8000.
-8. Add CLOUDINARY_URL and SECRET_KEY to the Config Vars and an env.py file (which will be placed in gitignore). The DATABASE_URL will be generated by Heroku and can be added to the env.py file as well. 
-9. Set DISABLE_COLLECTSTATIC to 1 but remove this when deploying the app. 
-10. Use pip3 freeze --local > requirements.txt to update the project with installed apps. 
-11. Click on the deploy tab.
-12. Connect to Github under deployment method, search the repository you wish to link to and click 'connect'.
-13. Select either automatic or manual deploy. The former rebuilds the app everytime you git push.
-14. You will see an "App was successfully deployed" message.
-15. The application can be run by clicking 'Open App'.
+
+The site is hosted on Heroku and deployed automatically by GitHub Actions.
+
+1. Create a Heroku app and a PostgreSQL database (Heroku Postgres or another provider).
+2. In the app's **Settings → Config Vars**, add:
+   * `SECRET_KEY`: a long random string
+   * `DATABASE_URL`: the PostgreSQL connection URL
+   * `CLOUDINARY_URL`: from the Cloudinary dashboard, for uploaded images
+3. Make sure **heroku/python** is the only buildpack and that `DISABLE_COLLECTSTATIC` is **not** set, as WhiteNoise needs static files collected on every deploy.
+4. Turn off Heroku's own automatic deploys from GitHub (**Deploy** tab), so every deploy goes through the test workflow.
+5. Create a Heroku API key (`heroku authorizations:create`) and add it to the GitHub repository under **Settings → Secrets and variables → Actions** as `HEROKU_API_KEY`.
+6. Push to `main`. GitHub Actions runs the checks and tests, then deploys to Heroku. Heroku installs Python 3.11 (from `.python-version`), collects static files and runs the database migrations before the new version goes live.
+
+### Running Locally
+
+1. Create a virtual environment with Python 3.11 and install the requirements: `pip install -r requirements.txt`.
+2. Create a `.env` file (it is ignored by git) with `SECRET_KEY`, `DATABASE_URL`, `CLOUDINARY_URL` and `DEBUG = "True"`.
+3. Run `python manage.py migrate`, then `python manage.py runserver`.
 
 ### Cloning the Repository 
   
@@ -477,13 +430,7 @@ The only exception are those User Stories that were labelled "won't do" as they'
 3. Open terminal and ensure you are in the correct location.
 4. Type in 'git clone' and paste the URL you'd copied in step 2 and press enter.
   
-## Acknowledgements
-
-I would like to thank my mentor Brian Macharia for his help during the project. I am more than grateful for his advice and guidance and he has truly helped me feel more confident in my code. 
-  
-A huge thanks to the tutor team at Code Institute for helping with difficulties during the automatic testing process. I'd also like to thank Code Insistute for their resources which taught me how to use the Django framework - such as Hello Django and I Think I Blog walkthroughs. The latter of which was helpful in building my Article and Comment models.
-  
-I'd like to thank Release Eritrea for the resources they'd given, such as images and articles to use for the website. 
+## Credits
   
 The hero image was from [Unsplash by Eyasu Etsub](https://unsplash.com/photos/5wdR59K0nyI?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink)
   
