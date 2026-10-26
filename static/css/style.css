@@ -468,8 +468,10 @@ footer {
     .comment-form,
     .who-section,
     .location {
-        width: 100%;
+        /* auto rather than 100% so the margins don't push it off screen */
+        width: auto;
         margin-left: 2px;
+        margin-right: 2px;
     }
 }
 
@@ -519,6 +521,8 @@ footer {
 
     .verse {
         margin: 50px 10px;
+        /* The 24rem desktop minimum is wider than a phone screen */
+        min-width: 0;
     }
 
     textarea {
@@ -592,7 +596,6 @@ footer {
     span img {
         width: 50px;
         height: 50px;
-        margin-top: 30px;
     }
 
     #balloon-img {
@@ -641,4 +644,20 @@ footer {
 .contact-section #div_id_website {
     position: absolute;
     left: -10000px;
+}
+
+/* Bootstrap's .row adds negative side margins for column gutters. The
+   nav bar and home page sections use .row without a container around
+   them, which made them wider than the screen on phones */
+#navbarScrolling,
+.intro-text > .row,
+.what-is,
+.what,
+.who,
+.what > .row,
+.who > .row,
+#press > .row,
+.gallery-section > .row {
+    margin-left: 0;
+    margin-right: 0;
 }
