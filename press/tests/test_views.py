@@ -1,8 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Article, Comment, Picture
 from django.urls import reverse
-from .filters import ArticleFilter
+from ..models import Article, Comment, Picture
 
 
 class TestingPressViews(TestCase):

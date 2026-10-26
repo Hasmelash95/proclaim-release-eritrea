@@ -31,6 +31,15 @@ jobs:
       - name: Check for missing migrations
         run: python manage.py makemigrations press info --check --dry-run
 
+      # Static files must be collected first, as pages are rendered with
+      # WhiteNoise's manifest storage. This also catches collectstatic
+      # failures before Heroku runs it during the build
+      - name: Collect static files
+        run: python manage.py collectstatic --noinput
+
+      - name: Run tests
+        run: python manage.py test
+
   deploy:
     needs: check
     if: github.ref == 'refs/heads/main'
