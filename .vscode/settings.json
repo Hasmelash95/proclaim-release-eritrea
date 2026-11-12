@@ -20,6 +20,17 @@
       "**/core.python*": true,
       "**/CVS": true
    },
+   "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+   "python.testing.unittestEnabled": true,
+   "python.testing.pytestEnabled": false,
+   "python.testing.unittestArgs": [
+      "-v",
+      "-s",
+      ".",
+      "-p",
+      "test*.py"
+   ],
+   "python.envFile": "${workspaceFolder}/.vscode/test.env",
    "files.autoSave": "off",
    "workbench.colorTheme": "Visual Studio Dark",
    "terminal.integrated.gpuAcceleration": "canvas",

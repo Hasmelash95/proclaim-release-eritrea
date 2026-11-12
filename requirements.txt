@@ -19,7 +19,7 @@ django-taggit==6.1.0
 gunicorn==20.1.0
 idna==3.11
 oauthlib==3.2.2
-Pillow==9.3.0
+Pillow==13.0.0
 psycopg2==2.9.5
 pycparser==2.23
 PyJWT==2.6.0

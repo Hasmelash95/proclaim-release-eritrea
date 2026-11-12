@@ -95,9 +95,8 @@ SECURE_SSL_REDIRECT = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 
-# Start HSTS at a low value; raise it once HTTPS-only access is confirmed
-# working, since browsers cache this and it can't be un-set early.
-SECURE_HSTS_SECONDS = 0 if DEBUG else 3600
+# Set to 1 year (in seconds) if not in DEBUG mode, otherwise 0
+SECURE_HSTS_SECONDS = 0 if DEBUG else 31536000
 
 SUMMERNOTE_CONFIG = {
 
